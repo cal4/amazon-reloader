@@ -14,3 +14,8 @@ Install [AutoHotkey](https://www.autohotkey.com/docs/Tutorial.htm#s11)
 ## Troubleshooting
 - Make sure to turn off any dark mode tools/extensions before running
 - The page must be sufficiently big to display the "Enter an amount..." text box and "Reload $1.00" button without scrolling
+- Turn off display color warming modes like Night light
+
+## Roadmap
+- Automatically exit when done
+- Reading run amount from file and persisting

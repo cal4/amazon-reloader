@@ -7,30 +7,34 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; Control F to activate the script.
 ^f::
 
-Loop, PUT-NUMBER-OF-RELOADS-HERE
+; PageReloadWait := 5000
+; PageReloadWait := 3500
+; PageReloadWait := 2500
+PageReloadWait := 1500
+StepWait := 100
+
+Loop, 4
 {
-    ImageSearch(85, "enter-an-amount.jpg")
+    ImageSearch(100, "enter-an-amount.jpg")
     MouseClick, Left
-    Sleep 50
+    Sleep StepWait
     Send 1
-    Sleep 50
+    Sleep StepWait
     Send {Enter}
-    Sleep 750
+    Sleep StepWait
     ImageSearch(140, "reload-1.jpg")
     MouseClick, Left
-    Sleep 5000
+    Sleep PageReloadWait
     ImageSearch(110, "reload-your-balance-again.jpg")
     MouseClick, Left
-    ; Random, rand, 10, 15
-    Sleep 1000 * 10
+    Sleep PageReloadWait
 }
 
-Exit
+ExitApp
 
 ImageSearch(scale, ImageFile)
 {
     ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *%scale% %ImageFile%
-    ; ImageSearch, FoundX, FoundY, A_ScreenWidth / 2, 0, A_ScreenWidth, A_ScreenHeight, *%scale% %ImageFile%
     if ErrorLevel = 2
     {
         MsgBox Could not conduct the search. $ImageFile
@@ -43,7 +47,6 @@ ImageSearch(scale, ImageFile)
     }
     if ErrorLevel = 0
     {
-        ; MsgBox,, Information, The image was found at %FoundX%x%FoundY%`n Don't touch mouse as app will move it, 5
         MouseMove, %FoundX%, %FoundY%
     }
 }
