@@ -7,13 +7,30 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; Control F to activate the script.
 ^f::
 
+InputBox, ReloadAmount, , How many reloads?
+
+ErrorMessage := ""
+if ReloadAmount is not integer
+{
+    ErrorMessage = Enter an integer
+}
+else if ReloadAmount <= 0
+{
+    ErrorMessage = Enter a positive number
+}
+
+if ErrorMessage {
+    MsgBox, %ErrorMessage%, exiting
+    ExitApp
+}
+
 ; PageReloadWait := 5000
 ; PageReloadWait := 3500
 ; PageReloadWait := 2500
 PageReloadWait := 2500
 StepWait := 100
 
-Loop, PUT-NUMBER-OF-RELOADS-HERE
+Loop, %ReloadAmount%
 {
     ImageSearch(100, "enter-an-amount.jpg")
     MouseClick, Left
@@ -42,12 +59,12 @@ ImageSearch(scale, ImageFile)
     if ErrorLevel = 2
     {
         MsgBox Could not conduct the search. $ImageFile
-        Exit
+        ExitApp
     }
     if ErrorLevel = 1
     {
         MsgBox could not find %ImageFile% on the screen.
-        Exit
+        ExitApp
     }
     if ErrorLevel = 0
     {
