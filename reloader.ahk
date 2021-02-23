@@ -10,10 +10,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; PageReloadWait := 5000
 ; PageReloadWait := 3500
 ; PageReloadWait := 2500
-PageReloadWait := 1500
+PageReloadWait := 2500
 StepWait := 100
 
-Loop, 4
+Loop, PUT-NUMBER-OF-RELOADS-HERE
 {
     ImageSearch(100, "enter-an-amount.jpg")
     MouseClick, Left
@@ -21,6 +21,10 @@ Loop, 4
     Send 1
     Sleep StepWait
     Send {Enter}
+    Sleep StepWait
+    Send {Esc}
+    Sleep StepWait
+    Send {Space}
     Sleep StepWait
     ImageSearch(140, "reload-1.jpg")
     MouseClick, Left
